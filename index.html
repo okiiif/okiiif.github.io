@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mutlu Yıllar Aşkımmmmmmm ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(135deg, #1a0a0f 0%, #2d1a1f 50%, #1a0a0f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #f5e6e8;
+    }
+
+    /* Snowfall */
+    .snowfall {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Floating Hearts */
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: #e63946;
+      opacity: 0.3;
+      animation: floatHeart 15s ease-in-out infinite;
+    }
+
+    @keyframes floatHeart {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+      25% {
+        transform: translateY(-30px) rotate(10deg) scale(1.1);
+      }
+      50% {
+        transform: translateY(-15px) rotate(-5deg) scale(1.05);
+      }
+      75% {
+        transform: translateY(-40px) rotate(5deg) scale(1.15);
+      }
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Year Badge */
+    .year-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 9999px;
+      background: rgba(45, 26, 31, 0.5);
+      backdrop-filter: blur(10px);
+      margin-bottom: 2rem;
+      animation: fadeIn 1s ease-out 0.2s both;
+    }
+
+    .year-badge span {
+      color: #d4af37;
+      font-weight: 500;
+    }
+
+    .sparkle {
+      color: #d4af37;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 1.5rem;
+      max-width: 1000px;
+      width: 100%;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .photo-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .center-content {
+        grid-column: 1 / -1;
+        order: -1;
+      }
+    }
+
+    /* Photo Frames */
+    .photo-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .photo-frame {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 3px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 
+        0 10px 40px rgba(230, 57, 70, 0.2),
+        0 0 30px rgba(212, 175, 55, 0.1);
+      animation: scaleIn 0.6s ease-out both;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.1) 0%,
+        transparent 50%,
+        rgba(230, 57, 70, 0.1) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .heart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      z-index: 10;
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.15); }
+    }
+
+    @keyframes scaleIn {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Center Content */
+    .center-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    .main-heart {
+      font-size: 4rem;
+      color: #e63946;
+      margin-bottom: 1.5rem;
+      animation: heartBeat 1.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(230, 57, 70, 0.5));
+    }
+
+    .main-quote {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-align: center;
+      line-height: 1.4;
+      animation: fadeIn 1s ease-out 0.8s both;
+      text-shadow: 0 0 30px rgba(230, 57, 70, 0.5);
+    }
+
+    .main-quote .highlight {
+      color: #d4af37;
+    }
+
+    .main-quote .normal {
+      color: #f5e6e8;
+    }
+
+    .decorative-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      animation: fadeIn 1s ease-out 1s both;
+    }
+
+    .line {
+      width: 4rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.5));
+    }
+
+    .line:last-child {
+      background: linear-gradient(to left, transparent, rgba(212, 175, 55, 0.5));
+    }
+
+    .subtitle {
+      margin-top: 1.5rem;
+      color: rgba(245, 230, 232, 0.7);
+      font-size: 1rem;
+      animation: fadeIn 1s ease-out 1.2s both;
+    }
+
+    /* Bottom Text */
+    .bottom-text {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 3rem;
+      animation: fadeIn 1s ease-out 1.4s both;
+    }
+
+    .bottom-text span {
+      color: rgba(245, 230, 232, 0.7);
+      font-size: 0.875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Heart SVG */
+    .heart-icon {
+      fill: #e63946;
+      stroke: none;
+    }
+
+    .heart-icon-outline {
+      fill: none;
+      stroke: #e63946;
+      stroke-width: 2;
+    }
+
+    /* Mobile bottom photos */
+    .mobile-photos {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-photos {
+        display: grid;
+      }
+      .desktop-only {
+        display: none;
+      }
+    }
+  .hidden {
+  display: none;
+}
+
+.visible {
+  display: flex;
+}
+
+  </style>
+</head>
+<body>
+  <div id="introScreen" style="
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #2d1a1f, #0f0508);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+">
+
+  <div id="startBtn" style="
+    font-size: 4rem;
+    cursor: pointer;
+    animation: heartBeat 1.5s infinite;
+  ">
+    ❤️
+  </div>
+
+  <p style="margin-top: 1rem; opacity: 0.8;">
+    Dokun ve hisset…
+  </p>
+</div>
+
+  
+  <!-- Snowfall -->
+  <div class="snowfall" id="snowfall"></div>
+
+  <!-- Floating Hearts -->
+  <div class="hearts-container" id="hearts"></div>
+
+  <!-- Main Content -->
+  <div class="container hidden" id="mainContent">
+    <!-- Year Badge -->
+    <div class="year-badge">
+      <svg class="sparkle" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+      </svg>
+      <span>2026</span>
+      <svg class="sparkle" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+      </svg>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="photo-grid">
+      <!-- Left Column -->
+      <div class="photo-column">
+        <div class="photo-frame" style="animation-delay: 0.4s">
+          <img src="photo1.png" alt="Sevgi anısı">
+          <div class="heart-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="heart-icon">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="photo-frame desktop-only" style="animation-delay: 0.6s">
+          <img src="photo2.png" alt="Sevgi anısı">
+          <div class="heart-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="heart-icon">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Content -->
+      <div class="center-content">
+        <div class="main-heart">❤️</div>
+        <h1 class="main-quote">
+          <span class="highlight">Benim dileğim</span><br>
+          <span class="normal">zaten</span><br>
+          <span class="highlight">benimle</span>
+        </h1>
+        <div class="decorative-line">
+          <div class="line"></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" class="heart-icon">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <div class="line"></div>
+        </div>
+        <p class="subtitle">Mutlu Yıllaaarrr Aşkıııımmm ❤️</p>
+      </div>
+
+      <!-- Right Column -->
+      <div class="photo-column">
+        <div class="photo-frame" style="animation-delay: 0.5s">
+          <img src="photo3.png" alt="Sevgi anısı">
+          <div class="heart-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="heart-icon">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="photo-frame desktop-only" style="animation-delay: 0.7s">
+          <img src="photo4.png" alt="Sevgi anısı">
+          <div class="heart-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" class="heart-icon">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Photos -->
+    <div class="mobile-photos">
+      <div class="photo-frame" style="animation-delay: 0.8s">
+        <img src="photo2.png" alt="Sevgi anısı">
+        <div class="heart-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" class="heart-icon">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="photo-frame" style="animation-delay: 0.9s">
+        <img src="photo4.png" alt="Sevgi anısı">
+        <div class="heart-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" class="heart-icon">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Text -->
+    <div class="bottom-text">
+      <svg class="sparkle" width="20" height="20" viewBox="0 0 24 24" fill="#d4af37">
+        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+      </svg>
+      <span>Sonsuza Kadar</span>
+      <svg class="sparkle" width="20" height="20" viewBox="0 0 24 24" fill="#d4af37" style="animation-delay: 0.5s">
+        <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+      </svg>
+    </div>
+  </div>
+<audio id="bgMusic">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+  <script>
+    // Create Snowflakes
+    function createSnowflakes() {
+      const snowfall = document.getElementById('snowfall');
+      const snowflakes = ['❄', '❅', '❆', '✧', '✦'];
+      
+      for (let i = 0; i < 50; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+        snowflake.style.left = Math.random() * 100 + '%';
+        snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+        snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+        snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        snowflake.style.animationDelay = Math.random() * 10 + 's';
+        snowfall.appendChild(snowflake);
+      }
+    }
+
+    // Create Floating Hearts
+    function createHearts() {
+      const container = document.getElementById('hearts');
+      const positions = [
+        { left: '5%', top: '20%', size: 24 },
+        { left: '15%', top: '60%', size: 32 },
+        { left: '85%', top: '30%', size: 28 },
+        { left: '90%', top: '70%', size: 20 },
+        { left: '50%', top: '85%', size: 36 },
+        { left: '25%', top: '10%', size: 22 },
+        { left: '75%', top: '15%', size: 26 },
+      ];
+
+      positions.forEach((pos, i) => {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerHTML = '❤';
+        heart.style.left = pos.left;
+        heart.style.top = pos.top;
+        heart.style.fontSize = pos.size + 'px';
+        heart.style.animationDelay = (i * 2) + 's';
+        container.appendChild(heart);
+      });
+    }
+
+
+  const startBtn = document.getElementById('startBtn');
+const introScreen = document.getElementById('introScreen');
+const mainContent = document.getElementById('mainContent');
+const bgMusic = document.getElementById('bgMusic');
+
+startBtn.addEventListener('click', () => {
+  // 🔥 ŞARKININ PATLAMA SANİYESİ
+  bgMusic.currentTime = 32; // <-- BURAYI SEN AYARLAYACAKSIN
+  bgMusic.play();
+
+  // ⏳ 5 SANİYE BEKLE
+  setTimeout(() => {
+    introScreen.style.display = 'none';
+    mainContent.classList.remove('hidden');
+    mainContent.classList.add('visible');
+	    createSnowflakes();
+    createHearts();
+  }, 5000);
+});
+
+  </script>
+
+</body>
+</html>
