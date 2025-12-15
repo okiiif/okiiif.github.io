@@ -620,9 +620,16 @@ setTimeout(() => {
   // GLOW
   document.querySelector('.main-quote').classList.add('glow');
 }, 5000);
+const mainHeart = document.querySelector('.main-heart');
+
+mainHeart.addEventListener('mousedown', startPress);
+mainHeart.addEventListener('touchstart', startPress);
+
+mainHeart.addEventListener('mouseup', cancelPress);
+mainHeart.addEventListener('mouseleave', cancelPress);
+mainHeart.addEventListener('touchend', cancelPress);
 
 });
-const mainHeart = document.querySelector('.main-heart');
 const secretOverlay = document.getElementById('secretOverlay');
 
 let pressTimer;
@@ -652,6 +659,7 @@ secretOverlay.addEventListener('click', () => {
 </body>
 
 </html>
+
 
 
 
