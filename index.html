@@ -327,6 +327,36 @@
 .visible {
   display: flex;
 }
+#flash {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transition: opacity 0.3s ease;
+}
+
+.flash-active {
+  opacity: 0.8;
+}
+.glow {
+  animation: glowPop 1.2s ease-out;
+}
+
+@keyframes glowPop {
+  0% {
+    text-shadow: 0 0 0 rgba(230,57,70,0);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(230,57,70,0.9),
+      0 0 60px rgba(212,175,55,0.8);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(230,57,70,0.5);
+  }
+}
 
   </style>
 </head>
@@ -471,8 +501,22 @@
 <audio id="bgMusic">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-  <script>
-    // Create Snowflakes
+  <div id="flash"></div>
+	<script>
+    function fadeInMusic(audio, target = 0.25, duration = 4000) {
+  audio.volume = 0;
+  const step = target / (duration / 100);
+  const fade = setInterval(() => {
+    if (audio.volume < target) {
+      audio.volume = Math.min(audio.volume + step, target);
+    } else {
+      clearInterval(fade);
+    }
+  }, 100);
+}
+
+	  
+	  // Create Snowflakes
     function createSnowflakes() {
       const snowfall = document.getElementById('snowfall');
       const snowflakes = ['❄', '❅', '❆', '✧', '✦'];
@@ -515,32 +559,48 @@
       });
     }
 
+let started = false;
 
   const startBtn = document.getElementById('startBtn');
 const introScreen = document.getElementById('introScreen');
 const mainContent = document.getElementById('mainContent');
 const bgMusic = document.getElementById('bgMusic');
+		const flash = document.getElementById('flash');
+
 
 startBtn.addEventListener('click', () => {
-  // 🔥 ŞARKININ PATLAMA SANİYESİ
+    if (started) return;
+  started = true;
+
+	// 🔥 ŞARKININ PATLAMA SANİYESİ
   bgMusic.currentTime = 32; // <-- BURAYI SEN AYARLAYACAKSIN
-  bgMusic.volume = 0.50; // 🔉 %25 ses
 	bgMusic.play();
+	fadeInMusic(bgMusic, 0.25, 4000);
 
   // ⏳ 5 SANİYE BEKLE
-  setTimeout(() => {
-    introScreen.style.display = 'none';
-    mainContent.classList.remove('hidden');
-    mainContent.classList.add('visible');
-	    createSnowflakes();
-    createHearts();
-  }, 5000);
+setTimeout(() => {
+  introScreen.style.display = 'none';
+  mainContent.classList.remove('hidden');
+  mainContent.classList.add('visible');
+
+  createSnowflakes();
+  createHearts();
+
+  // FLASH
+  
+	flash.classList.add('flash-active');
+  setTimeout(() => flash.classList.remove('flash-active'), 300);
+
+  // GLOW
+  document.querySelector('.main-quote').classList.add('glow');
+}, 5000);
+
 });
 
   </script>
-
 </body>
 
 </html>
+
 
 
