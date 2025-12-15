@@ -377,6 +377,9 @@
   text-shadow: 0 0 30px rgba(212,175,55,0.8);
   padding: 2rem 3rem;
 }
+body.secret-open {
+  overflow: hidden;
+}
 
   </style>
 </head>
@@ -528,8 +531,9 @@
   </div>
 </div>
 
-	<script>
-    function fadeInMusic(audio, target = 0.25, duration = 4000) {
+<script>
+/* 🎵 Müzik Fade In */
+function fadeInMusic(audio, target = 0.25, duration = 4000) {
   audio.volume = 0;
   const step = target / (duration / 100);
   const fade = setInterval(() => {
@@ -541,124 +545,116 @@
   }, 100);
 }
 
-	  
-	  // Create Snowflakes
-    function createSnowflakes() {
-      const snowfall = document.getElementById('snowfall');
-      const snowflakes = ['❄', '❅', '❆', '✧', '✦'];
-      
-      for (let i = 0; i < 50; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-        snowflake.style.left = Math.random() * 100 + '%';
-        snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-        snowflake.style.opacity = Math.random() * 0.6 + 0.4;
-        snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        snowflake.style.animationDelay = Math.random() * 10 + 's';
-        snowfall.appendChild(snowflake);
-      }
-    }
+/* ❄️ Kar Efekti */
+function createSnowflakes() {
+  const snowfall = document.getElementById('snowfall');
+  const snowflakes = ['❄', '❅', '❆', '✧', '✦'];
 
-    // Create Floating Hearts
-    function createHearts() {
-      const container = document.getElementById('hearts');
-      const positions = [
-        { left: '5%', top: '20%', size: 24 },
-        { left: '15%', top: '60%', size: 32 },
-        { left: '85%', top: '30%', size: 28 },
-        { left: '90%', top: '70%', size: 20 },
-        { left: '50%', top: '85%', size: 36 },
-        { left: '25%', top: '10%', size: 22 },
-        { left: '75%', top: '15%', size: 26 },
-      ];
+  for (let i = 0; i < 50; i++) {
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+    snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+    snowflake.style.left = Math.random() * 100 + '%';
+    snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+    snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+    snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    snowflake.style.animationDelay = Math.random() * 10 + 's';
+    snowfall.appendChild(snowflake);
+  }
+}
 
-      positions.forEach((pos, i) => {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.innerHTML = '❤';
-        heart.style.left = pos.left;
-        heart.style.top = pos.top;
-        heart.style.fontSize = pos.size + 'px';
-        heart.style.animationDelay = (i * 2) + 's';
-        container.appendChild(heart);
-      });
-    }
+/* ❤️ Uçan Kalpler */
+function createHearts() {
+  const container = document.getElementById('hearts');
+  const positions = [
+    { left: '5%', top: '20%', size: 24 },
+    { left: '15%', top: '60%', size: 32 },
+    { left: '85%', top: '30%', size: 28 },
+    { left: '90%', top: '70%', size: 20 },
+    { left: '50%', top: '85%', size: 36 },
+    { left: '25%', top: '10%', size: 22 },
+    { left: '75%', top: '15%', size: 26 },
+  ];
 
-let started = false;
+  positions.forEach((pos, i) => {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = '❤';
+    heart.style.left = pos.left;
+    heart.style.top = pos.top;
+    heart.style.fontSize = pos.size + 'px';
+    heart.style.animationDelay = (i * 2) + 's';
+    container.appendChild(heart);
+  });
+}
 
-  const startBtn = document.getElementById('startBtn');
-const introScreen = document.getElementById('introScreen');
-const mainContent = document.getElementById('mainContent');
-const bgMusic = document.getElementById('bgMusic');
-		const flash = document.getElementById('flash');
-
-
-startBtn.addEventListener('click', () => {
-    if (started) return;
-  started = true;
-
-	// 🔥 ŞARKININ PATLAMA SANİYESİ
-  bgMusic.currentTime = 32; // <-- BURAYI SEN AYARLAYACAKSIN
-	bgMusic.play();
-	fadeInMusic(bgMusic, 0.25, 4000);
-
-  // ⏳ 5 SANİYE BEKLE
-setTimeout(() => {
-  introScreen.style.display = 'none';
-  mainContent.classList.remove('hidden');
-  mainContent.classList.add('visible');
-
-  createSnowflakes();
-  createHearts();
-
-  // FLASH
-  
-	flash.classList.add('flash-active');
-  setTimeout(() => flash.classList.remove('flash-active'), 300);
-
-  // GLOW
-  document.querySelector('.main-quote').classList.add('glow');
-}, 5000);
-const mainHeart = document.querySelector('.main-heart');
-
-mainHeart.addEventListener('mousedown', startPress);
-mainHeart.addEventListener('touchstart', startPress);
-
-mainHeart.addEventListener('mouseup', cancelPress);
-mainHeart.addEventListener('mouseleave', cancelPress);
-mainHeart.addEventListener('touchend', cancelPress);
-
-});
-const secretOverlay = document.getElementById('secretOverlay');
-
+/* 🔐 Gizli Overlay – Basılı Tutma */
 let pressTimer;
-
-mainHeart.addEventListener('mousedown', startPress);
-mainHeart.addEventListener('touchstart', startPress);
-
-mainHeart.addEventListener('mouseup', cancelPress);
-mainHeart.addEventListener('mouseleave', cancelPress);
-mainHeart.addEventListener('touchend', cancelPress);
 
 function startPress() {
   pressTimer = setTimeout(() => {
     secretOverlay.style.display = 'flex';
-  }, 3000); // ⏱️ 3 saniye
+  }, 3000); // 3 saniye
 }
 
 function cancelPress() {
   clearTimeout(pressTimer);
 }
 
+/* 🚀 Başlangıç */
+let started = false;
+
+const startBtn = document.getElementById('startBtn');
+const introScreen = document.getElementById('introScreen');
+const mainContent = document.getElementById('mainContent');
+const bgMusic = document.getElementById('bgMusic');
+const flash = document.getElementById('flash');
+const mainHeart = document.querySelector('.main-heart');
+const secretOverlay = document.getElementById('secretOverlay');
+
+/* ❤️ Kalbe Basılı Tutma */
+mainHeart.addEventListener('mousedown', startPress);
+mainHeart.addEventListener('touchstart', startPress);
+
+mainHeart.addEventListener('mouseup', cancelPress);
+mainHeart.addEventListener('mouseleave', cancelPress);
+mainHeart.addEventListener('touchend', cancelPress);
+
+/* 🔒 Overlay Kapat */
 secretOverlay.addEventListener('click', () => {
   secretOverlay.style.display = 'none';
 });
 
-  </script>
+/* ▶️ Başlat Butonu */
+startBtn.addEventListener('click', () => {
+  if (started) return;
+  started = true;
+
+  bgMusic.currentTime = 32; // şarkının patlama saniyesi
+  bgMusic.play();
+  fadeInMusic(bgMusic, 0.25, 4000);
+
+  setTimeout(() => {
+    introScreen.style.display = 'none';
+    mainContent.classList.remove('hidden');
+    mainContent.classList.add('visible');
+
+    createSnowflakes();
+    createHearts();
+
+    flash.classList.add('flash-active');
+    setTimeout(() => flash.classList.remove('flash-active'), 300);
+
+    document.querySelector('.main-quote').classList.add('glow');
+  }, 5000);
+});
+</script>
+
+
 </body>
 
 </html>
+
 
 
 
