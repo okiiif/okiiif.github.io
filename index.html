@@ -357,6 +357,26 @@
     text-shadow: 0 0 30px rgba(230,57,70,0.5);
   }
 }
+#secretOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+#secretMessage {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: #d4af37;
+  text-align: center;
+  animation: fadeIn 1s ease;
+  text-shadow: 0 0 30px rgba(212,175,55,0.8);
+  padding: 2rem 3rem;
+}
 
   </style>
 </head>
@@ -502,6 +522,12 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio>
   <div id="flash"></div>
+	<div id="secretOverlay">
+  <div id="secretMessage">
+    Seni her yıl<br>daha çok seveceğim ❤️
+  </div>
+</div>
+
 	<script>
     function fadeInMusic(audio, target = 0.25, duration = 4000) {
   audio.volume = 0;
@@ -596,11 +622,37 @@ setTimeout(() => {
 }, 5000);
 
 });
+const mainHeart = document.querySelector('.main-heart');
+const secretOverlay = document.getElementById('secretOverlay');
+
+let pressTimer;
+
+mainHeart.addEventListener('mousedown', startPress);
+mainHeart.addEventListener('touchstart', startPress);
+
+mainHeart.addEventListener('mouseup', cancelPress);
+mainHeart.addEventListener('mouseleave', cancelPress);
+mainHeart.addEventListener('touchend', cancelPress);
+
+function startPress() {
+  pressTimer = setTimeout(() => {
+    secretOverlay.style.display = 'flex';
+  }, 3000); // ⏱️ 3 saniye
+}
+
+function cancelPress() {
+  clearTimeout(pressTimer);
+}
+
+secretOverlay.addEventListener('click', () => {
+  secretOverlay.style.display = 'none';
+});
 
   </script>
 </body>
 
 </html>
+
 
 
 
