@@ -380,6 +380,9 @@
 body.secret-open {
   overflow: hidden;
 }
+#secretOverlay {
+  animation: fadeIn 0.4s ease;
+}
 
   </style>
 </head>
@@ -594,12 +597,16 @@ let pressTimer;
 function startPress() {
   pressTimer = setTimeout(() => {
     secretOverlay.style.display = 'flex';
-  }, 3000); // 3 saniye
+    document.body.classList.add('secret-open');
+  }, 3000);
 }
+
 
 function cancelPress() {
   clearTimeout(pressTimer);
+  pressTimer = null;
 }
+
 
 /* 🚀 Başlangıç */
 let started = false;
@@ -609,51 +616,60 @@ const introScreen = document.getElementById('introScreen');
 const mainContent = document.getElementById('mainContent');
 const bgMusic = document.getElementById('bgMusic');
 const flash = document.getElementById('flash');
-const mainHeart = document.querySelector('.main-heart');
 const secretOverlay = document.getElementById('secretOverlay');
 
-/* ❤️ Kalbe Basılı Tutma */
-mainHeart.addEventListener('mousedown', startPress);
-mainHeart.addEventListener('touchstart', startPress);
 
-mainHeart.addEventListener('mouseup', cancelPress);
-mainHeart.addEventListener('mouseleave', cancelPress);
-mainHeart.addEventListener('touchend', cancelPress);
-
-/* 🔒 Overlay Kapat */
-secretOverlay.addEventListener('click', () => {
-  secretOverlay.style.display = 'none';
-});
 
 /* ▶️ Başlat Butonu */
-startBtn.addEventListener('click', () => {
+startBtn.addEventListener('pointerdown', () => {
+
   if (started) return;
   started = true;
+	startBtn.style.animation = 'heartBeat 0.4s infinite';
+
 
   bgMusic.currentTime = 32; // şarkının patlama saniyesi
   bgMusic.play();
   fadeInMusic(bgMusic, 0.25, 4000);
 
-  setTimeout(() => {
-    introScreen.style.display = 'none';
-    mainContent.classList.remove('hidden');
-    mainContent.classList.add('visible');
+setTimeout(() => {
+	startBtn.style.animation = '';
 
-    createSnowflakes();
-    createHearts();
+  introScreen.style.display = 'none';
+  mainContent.classList.remove('hidden');
+  mainContent.classList.add('visible');
 
-    flash.classList.add('flash-active');
-    setTimeout(() => flash.classList.remove('flash-active'), 300);
+  createSnowflakes();
+  createHearts();
 
-    document.querySelector('.main-quote').classList.add('glow');
-  }, 5000);
+  flash.classList.add('flash-active');
+  setTimeout(() => flash.classList.remove('flash-active'), 300);
+
+  document.querySelector('.main-quote').classList.add('glow');
+
+  /* ❤️ KALP EVENTLERİ BURADA */
+  const mainHeart = document.querySelector('.main-heart');
+
+mainHeart.addEventListener('pointerdown', startPress);
+mainHeart.addEventListener('pointerup', cancelPress);
+mainHeart.addEventListener('pointerleave', cancelPress);
+
+
+}, 5000);
+
+
+secretOverlay.addEventListener('click', () => {
+  secretOverlay.style.display = 'none';
+  document.body.classList.remove('secret-open');
 });
+
 </script>
 
 
 </body>
 
 </html>
+
 
 
 
