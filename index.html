@@ -524,7 +524,8 @@ const bgMusic = document.getElementById('bgMusic');
 startBtn.addEventListener('click', () => {
   // 🔥 ŞARKININ PATLAMA SANİYESİ
   bgMusic.currentTime = 32; // <-- BURAYI SEN AYARLAYACAKSIN
-  bgMusic.play();
+  bgMusic.volume = 0.50; // 🔉 %25 ses
+	bgMusic.play();
 
   // ⏳ 5 SANİYE BEKLE
   setTimeout(() => {
@@ -541,4 +542,5 @@ startBtn.addEventListener('click', () => {
 </body>
 
 </html>
+
 
