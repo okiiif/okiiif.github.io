@@ -6,6 +6,7 @@
   <title>Mutlu Yıllar Aşkımmmmmmm ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -42,12 +43,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-10vh) rotate(0deg);
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-      }
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
     }
 
     /* Floating Hearts */
@@ -70,18 +67,10 @@
     }
 
     @keyframes floatHeart {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg) scale(1);
-      }
-      25% {
-        transform: translateY(-30px) rotate(10deg) scale(1.1);
-      }
-      50% {
-        transform: translateY(-15px) rotate(-5deg) scale(1.05);
-      }
-      75% {
-        transform: translateY(-40px) rotate(5deg) scale(1.15);
-      }
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+      25% { transform: translateY(-30px) rotate(10deg) scale(1.1); }
+      50% { transform: translateY(-15px) rotate(-5deg) scale(1.05); }
+      75% { transform: translateY(-40px) rotate(5deg) scale(1.15); }
     }
 
     /* Main Container */
@@ -95,6 +84,9 @@
       justify-content: center;
       padding: 2rem;
     }
+
+    .hidden { display: none; }
+    .visible { display: flex; }
 
     /* Year Badge */
     .year-badge {
@@ -136,22 +128,12 @@
     }
 
     @media (max-width: 768px) {
-      .photo-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-      .center-content {
-        grid-column: 1 / -1;
-        order: -1;
-      }
+      .photo-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .center-content { grid-column: 1 / -1; order: -1; }
     }
 
     /* Photo Frames */
-    .photo-column {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+    .photo-column { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .photo-frame {
       position: relative;
@@ -159,9 +141,7 @@
       border-radius: 12px;
       overflow: hidden;
       border: 3px solid rgba(212, 175, 55, 0.5);
-      box-shadow: 
-        0 10px 40px rgba(230, 57, 70, 0.2),
-        0 0 30px rgba(212, 175, 55, 0.1);
+      box-shadow: 0 10px 40px rgba(230, 57, 70, 0.2), 0 0 30px rgba(212, 175, 55, 0.1);
       animation: scaleIn 0.6s ease-out both;
     }
 
@@ -172,20 +152,13 @@
       transition: transform 0.5s ease;
     }
 
-    .photo-frame:hover img {
-      transform: scale(1.05);
-    }
+    .photo-frame:hover img { transform: scale(1.05); }
 
     .photo-frame::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(212, 175, 55, 0.1) 0%,
-        transparent 50%,
-        rgba(230, 57, 70, 0.1) 100%
-      );
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%, rgba(230, 57, 70, 0.1) 100%);
       z-index: 1;
       pointer-events: none;
     }
@@ -241,13 +214,8 @@
       text-shadow: 0 0 30px rgba(230, 57, 70, 0.5);
     }
 
-    .main-quote .highlight {
-      color: #d4af37;
-    }
-
-    .main-quote .normal {
-      color: #f5e6e8;
-    }
+    .main-quote .highlight { color: #d4af37; }
+    .main-quote .normal { color: #f5e6e8; }
 
     .decorative-line {
       display: flex;
@@ -290,81 +258,67 @@
       text-transform: uppercase;
     }
 
-    /* Heart SVG */
-    .heart-icon {
-      fill: #e63946;
-      stroke: none;
-    }
+    .heart-icon { fill: #e63946; stroke: none; }
+    .heart-icon-outline { fill: none; stroke: #e63946; stroke-width: 2; }
 
-    .heart-icon-outline {
-      fill: none;
-      stroke: #e63946;
-      stroke-width: 2;
-    }
-
-    /* Mobile bottom photos */
-    .mobile-photos {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-      width: 100%;
-      max-width: 400px;
-    }
-
+    /* Mobile Bottom Photos */
+    .mobile-photos { display: none; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; width: 100%; max-width: 400px; }
     @media (max-width: 768px) {
-      .mobile-photos {
-        display: grid;
-      }
-      .desktop-only {
-        display: none;
-      }
+      .mobile-photos { display: grid; }
+      .desktop-only { display: none; }
     }
-  .hidden {
-  display: none;
-}
 
-.visible {
-  display: flex;
-}
+    /* Flash Effect */
+    #flash { position: fixed; inset: 0; background: white; opacity: 0; pointer-events: none; z-index: 9998; transition: opacity 0.3s ease; }
+    .flash-active { opacity: 0.8; }
 
+    .glow { animation: glowPop 1.2s ease-out; }
+    @keyframes glowPop {
+      0% { text-shadow: 0 0 0 rgba(230,57,70,0); }
+      50% { text-shadow: 0 0 30px rgba(230,57,70,0.9), 0 0 60px rgba(212,175,55,0.8); }
+      100% { text-shadow: 0 0 30px rgba(230,57,70,0.5); }
+    }
+
+    /* Secret Overlay */
+    #secretOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    #secretMessage {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: #d4af37;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      text-shadow: 0 0 30px rgba(212,175,55,0.8);
+      padding: 2rem 3rem;
+    }
+
+    body.secret-open { overflow: hidden; }
   </style>
 </head>
 <body>
-  <div id="introScreen" style="
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle, #2d1a1f, #0f0508);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  color: #fff;
-">
 
-  <div id="startBtn" style="
-    font-size: 4rem;
-    cursor: pointer;
-    animation: heartBeat 1.5s infinite;
-  ">
-    ❤️
+  <!-- Intro Screen -->
+  <div id="introScreen">
+    <div id="startBtn">❤️</div>
+    <p>Kalbe bir kere dokun ve bekle…</p>
   </div>
 
-  <p style="margin-top: 1rem; opacity: 0.8;">
-    Kalbe bir kere dokun ve bekle…
-  </p>
-</div>
-
-  
-  <!-- Snowfall -->
+  <!-- Snowfall & Floating Hearts -->
   <div class="snowfall" id="snowfall"></div>
-
-  <!-- Floating Hearts -->
   <div class="hearts-container" id="hearts"></div>
 
   <!-- Main Content -->
   <div class="container hidden" id="mainContent">
+
     <!-- Year Badge -->
     <div class="year-badge">
       <svg class="sparkle" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -413,7 +367,7 @@
           </svg>
           <div class="line"></div>
         </div>
-        <p class="subtitle">Mutluuu Benlii Yıllaaarrr Aşkıııımmm  ❤️</p>
+        <p class="subtitle">Mutluuu Benlii Yıllaaarrr Aşkıııımmm ❤️</p>
       </div>
 
       <!-- Right Column -->
@@ -467,16 +421,36 @@
         <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
       </svg>
     </div>
+
   </div>
-<audio id="bgMusic">
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+
+  <audio id="bgMusic">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="flash"></div>
+  <div id="secretOverlay">
+    <div id="secretMessage">Seni her yıl<br>daha çok seveceğim ❤️</div>
+  </div>
+
   <script>
-    // Create Snowflakes
+    // 🎵 Music Fade In
+    function fadeInMusic(audio, target = 0.25, duration = 4000) {
+      audio.volume = 0;
+      const step = target / (duration / 100);
+      const fade = setInterval(() => {
+        if (audio.volume < target) {
+          audio.volume = Math.min(audio.volume + step, target);
+        } else {
+          clearInterval(fade);
+        }
+      }, 100);
+    }
+
+    // ❄️ Snowflakes
     function createSnowflakes() {
       const snowfall = document.getElementById('snowfall');
       const snowflakes = ['❄', '❅', '❆', '✧', '✦'];
-      
       for (let i = 0; i < 50; i++) {
         const snowflake = document.createElement('div');
         snowflake.className = 'snowflake';
@@ -490,7 +464,7 @@
       }
     }
 
-    // Create Floating Hearts
+    // ❤️ Floating Hearts
     function createHearts() {
       const container = document.getElementById('hearts');
       const positions = [
@@ -502,7 +476,6 @@
         { left: '25%', top: '10%', size: 22 },
         { left: '75%', top: '15%', size: 26 },
       ];
-
       positions.forEach((pos, i) => {
         const heart = document.createElement('div');
         heart.className = 'floating-heart';
@@ -515,29 +488,57 @@
       });
     }
 
+    // 🔐 Secret Overlay
+    let pressTimer;
+    function startPress() {
+      pressTimer = setTimeout(() => {
+        secretOverlay.style.display = 'flex';
+        document.body.classList.add('secret-open');
+      }, 3000);
+    }
+    function cancelPress() { clearTimeout(pressTimer); }
 
-  const startBtn = document.getElementById('startBtn');
-const introScreen = document.getElementById('introScreen');
-const mainContent = document.getElementById('mainContent');
-const bgMusic = document.getElementById('bgMusic');
+    // 🚀 Start Button
+    let started = false;
+    const startBtn = document.getElementById('startBtn');
+    const introScreen = document.getElementById('introScreen');
+    const mainContent = document.getElementById('mainContent');
+    const bgMusic = document.getElementById('bgMusic');
+    const flash = document.getElementById('flash');
+    const secretOverlay = document.getElementById('secretOverlay');
 
-startBtn.addEventListener('click', () => {
-  // 🔥 ŞARKININ PATLAMA SANİYESİ
-  bgMusic.currentTime = 32; // <-- BURAYI SEN AYARLAYACAKSIN
-  bgMusic.play();
+    startBtn.addEventListener('pointerdown', () => {
+      if (started) return;
+      started = true;
+      startBtn.style.animation = 'heartBeat 0.4s infinite';
+      bgMusic.currentTime = 32; // Şarkının patlama saniyesi
+      bgMusic.play();
+      fadeInMusic(bgMusic, 0.25, 4000);
 
-  // ⏳ 5 SANİYE BEKLE
-  setTimeout(() => {
-    introScreen.style.display = 'none';
-    mainContent.classList.remove('hidden');
-    mainContent.classList.add('visible');
-	    createSnowflakes();
-    createHearts();
-  }, 5000);
-});
+      setTimeout(() => {
+        introScreen.style.display = 'none';
+        mainContent.classList.remove('hidden');
+        mainContent.classList.add('visible');
+        createSnowflakes();
+        createHearts();
+        flash.classList.add('flash-active');
+        setTimeout(() => flash.classList.remove('flash-active'), 300);
+        document.querySelector('.main-quote').classList.add('glow');
 
+        // ❤️ Main Heart Events
+        const mainHeart = document.querySelector('.main-heart');
+        mainHeart.addEventListener('mousedown', startPress);
+        mainHeart.addEventListener('touchstart', startPress);
+        mainHeart.addEventListener('mouseup', cancelPress);
+        mainHeart.addEventListener('mouseleave', cancelPress);
+        mainHeart.addEventListener('touchend', cancelPress);
+      }, 5000);
+    });
+
+    secretOverlay.addEventListener('click', () => {
+      secretOverlay.style.display = 'none';
+      document.body.classList.remove('secret-open');
+    });
   </script>
-
 </body>
-
 </html>
