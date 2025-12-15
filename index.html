@@ -650,10 +650,12 @@ setTimeout(() => {
   /* ❤️ KALP EVENTLERİ BURADA */
   const mainHeart = document.querySelector('.main-heart');
 
-mainHeart.addEventListener('pointerdown', startPress);
-mainHeart.addEventListener('pointerup', cancelPress);
-mainHeart.addEventListener('pointerleave', cancelPress);
+  mainHeart.addEventListener('mousedown', startPress);
+  mainHeart.addEventListener('touchstart', startPress);
 
+  mainHeart.addEventListener('mouseup', cancelPress);
+  mainHeart.addEventListener('mouseleave', cancelPress);
+  mainHeart.addEventListener('touchend', cancelPress);
 
 }, 5000);
 
